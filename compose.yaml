@@ -1,0 +1,28 @@
+name: bedrock
+
+services:
+
+  bedrock:
+    image: bedrock:$VERSION
+    pull_policy: build
+    build:
+      context: .
+      args:
+        version: $VERSION
+      platforms:
+        - linux/amd64
+    platform: linux/amd64
+    container_name: bedrock
+    hostname: bedrock
+    stdin_open: true
+    tty: true
+    ports:
+      - 19132:19132/tcp
+      - 19132:19132/udp
+      - 19133:19133/tcp
+      - 19133:19133/udp
+    volumes:
+      - bedrock:/bedrock
+
+volumes:
+  bedrock:
